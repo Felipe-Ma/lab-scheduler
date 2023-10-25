@@ -32,3 +32,15 @@ class TestFunctions(unittest.TestCase):
     def test_get_ip(self):
         self.assertEqual(get_ip(), "10.248.200.191")
 
+    # Test get_os()
+    # Test exception
+    @patch("functions.platform.system", side_effect=Exception("Mocked exception"))
+    @patch("functions.print")
+    def test_get_os_exception(self, mock_print, mock_platform):
+        result = get_os()
+        mock_print.assert_called_with("Mocked exceptionError getting Operating System!")
+        self.assertEqual(result, "Unknown")
+
+    def test_get_os(self):
+        self.assertEqual(get_os(), "Windows")
+

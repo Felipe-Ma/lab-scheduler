@@ -1,5 +1,7 @@
 import os
 import socket
+import platform
+
 
 class Server:
     def __init__(self, name, ip, username):
@@ -11,7 +13,6 @@ class Server:
 # Retrieve Username of the user
 def get_username():
     username = "Unknown"
-
     try:
         if os.name == 'nt':
             username = os.getenv('username')
@@ -35,3 +36,13 @@ def get_ip():
     except Exception as e:
         print(str(e) + "Error getting IP address!")
     return ip
+
+
+# Get Operating System
+def get_os():
+    operating_system = "Unknown"
+    try:
+        operating_system = platform.system()
+    except Exception as e:
+        print(str(e) + "Error getting Operating System!")
+    return operating_system
