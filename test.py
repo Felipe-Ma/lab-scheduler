@@ -44,3 +44,14 @@ class TestFunctions(unittest.TestCase):
     def test_get_os(self):
         self.assertEqual(get_os(), "Windows")
 
+    # Test get_cpu()
+    # Test exception
+    @patch("functions.cpuinfo.get_cpu_info", side_effect=Exception("Mocked exception"))
+    @patch("functions.print")
+    def test_get_cpu_exception(self, mock_print, mock_cpuinfo):
+        result = get_cpu()
+        mock_print.assert_called_with("Mocked exceptionError getting CPU info!")
+        self.assertEqual(result, "Unknown")
+
+    def test_get_cpu(self):
+        self.assertEqual(get_cpu(), "11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz")
