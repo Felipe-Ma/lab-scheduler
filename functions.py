@@ -1,7 +1,7 @@
 import os
 import socket
 import platform
-
+import cpuinfo
 
 class Server:
     def __init__(self, name, ip, username):
@@ -46,3 +46,13 @@ def get_os():
     except Exception as e:
         print(str(e) + "Error getting Operating System!")
     return operating_system
+
+
+# Get CPU info
+def get_cpu():
+    cpu = "Unknown"
+    try:
+        cpu = cpuinfo.get_cpu_info()['brand_raw']
+    except Exception as e:
+        print(str(e) + "Error getting CPU info!")
+    return cpu
