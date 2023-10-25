@@ -3,11 +3,17 @@ import socket
 import platform
 import cpuinfo
 
+
 class Server:
-    def __init__(self, name, ip, username):
+    def __init__(self, name=None, ip=None, username=None, operating_system=None, cpu=None):
         self.name = name
         self.ip = ip
         self.username = username
+        self.operating_system = operating_system
+        self.cpu = cpu
+
+    def __str__(self):
+        return f"Server: {self.name}, IP: {self.ip}, Username: {self.username}, OS: {self.operating_system}, CPU: {self.cpu}"
 
 
 # Retrieve Username of the user

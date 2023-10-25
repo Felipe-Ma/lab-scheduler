@@ -1,7 +1,21 @@
 from functions import *
 
+
+def method_name():
+    server.name = "Server 1"
+    server.ip = get_ip()
+    server.username = get_username()
+    server.operating_system = get_os()
+    server.cpu = get_cpu()
+
+
 if __name__ == '__main__':
-    print(get_username())  # Tested
-    print(get_ip())  # Tested
-    print(get_os()) # Tested
-    print(get_cpu()) # Tested
+    server = Server()
+    # Print
+    print(server)
+
+    # Call functions and fill in the server object
+    method_name()
+
+    # Print
+    print(server)
