@@ -42,10 +42,9 @@ class Server:
     def add_product_version(self, product_version):
         self.product_version = product_version
 
-    # When Server object is called, print the following
+    # When Server object is called, print all the attributes
     def __call__(self):
-        print(f"Server: {self.name}, IP: {self.ip}, Username: {self.username}, OS: {self.operating_system}, CPU: {self.cpu}")
-
+        print(f"Server: {self.name}, IP: {self.ip}, Username: {self.username}, OS: {self.operating_system}, CPU: {self.cpu}, Product Name: {self.product_name}, Product Version: {self.product_version}")
 
 # Retrieve Username of the user
 def get_username():
@@ -84,10 +83,10 @@ def get_os():
             operating_system = platform.platform(terse=True)
             return operating_system
         elif os.name == 'posix':
+            # Needs to be fixed
             operating_system = platform.platform(terse=True)
             return operating_system
 
-    #operating_system = platform.system()
     except Exception as e:
         print(str(e) + "Error getting Operating System!")
     return operating_system

@@ -7,6 +7,8 @@ def retrieve_server_info(server):
     server.add_username(get_username())
     server.add_operating_system(get_os())
     server.add_cpu(get_cpu())
+    server.add_product_name(get_product_name())
+    server.add_product_version(get_product_version())
     server()
 
 
