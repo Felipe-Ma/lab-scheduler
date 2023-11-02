@@ -79,7 +79,15 @@ def get_ip():
 def get_os():
     operating_system = "Unknown"
     try:
-        operating_system = platform.system()
+        # Get Specific OS
+        if os.name == 'nt':
+            operating_system = platform.platform(terse=True)
+            return operating_system
+        elif os.name == 'posix':
+            operating_system = platform.platform(terse=True)
+            return operating_system
+
+    #operating_system = platform.system()
     except Exception as e:
         print(str(e) + "Error getting Operating System!")
     return operating_system
