@@ -6,7 +6,8 @@ import cpuinfo
 
 
 class Server:
-    def __init__(self, name=None, ip=None, username=None, operating_system=None, cpu=None, product_name=None, product_version=None):
+    def __init__(self, name=None, ip=None, username=None, operating_system=None, cpu=None, product_name=None,
+                 product_version=None):
         self.name = name
         self.ip = ip
         self.username = username
@@ -16,7 +17,8 @@ class Server:
         self.product_version = product_version
 
     def __str__(self):
-        return f"Server: {self.name}, IP: {self.ip}, Username: {self.username}, OS: {self.operating_system}, CPU: {self.cpu}"
+        return (f"Server: {self.name}, IP: {self.ip}, Username: {self.username}, OS: {self.operating_system}, "
+                f"CPU: {self.cpu}")
 
     # Add IP address to the server object
     def add_ip(self, ip):
@@ -45,6 +47,7 @@ class Server:
     # When Server object is called, print all the attributes
     def __call__(self):
         print(f"Server: {self.name}, IP: {self.ip}, Username: {self.username}, OS: {self.operating_system}, CPU: {self.cpu}, Product Name: {self.product_name}, Product Version: {self.product_version}")
+
 
 # Retrieve Username of the user
 def get_username():

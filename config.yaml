@@ -1,0 +1,27 @@
+# Configurations for the Server Scheduler
+
+# Name of the server
+serverName: Testing 1
+# File path where text file will be created,
+# placed in the server-scheduler folder
+# Linux Example: /root/Desktop/testEnvironment/lab-scheduler/
+# Windows Example: C:\Users\user\Desktop\testEnvironment\lab-scheduler\
+folderPath: ""
+
+# Name of the Credential File
+credentialsName: 'credentials.json'
+
+# Workbook and Worksheet names
+workBook: Server Dashboard
+workSheet: Yoda
+
+# Region (add appropriate region value here)
+region: Sacramento/Rancho Cordova
+
+# Drive Bays (add appropriate drive bays here)
+driveBays: 16
+
+# Connection Type (add appropriate connection type here)
+connectionType: U.2
+
+
