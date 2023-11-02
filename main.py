@@ -13,6 +13,8 @@ if __name__ == '__main__':
     server = Server()
     # Print
     print(server)
+    print(get_product_name())
+    print(get_product_version())
 
     # Call functions and fill in the server object
     method_name()

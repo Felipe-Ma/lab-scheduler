@@ -55,3 +55,15 @@ class TestFunctions(unittest.TestCase):
 
     def test_get_cpu(self):
         self.assertEqual(get_cpu(), "11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz")
+
+    # Test get_product_name()
+    # Test exception
+    @patch("functions.subprocess.Popen", side_effect=Exception("Mocked exception"))
+    @patch("functions.print")
+    def test_get_product_name_exception(self, mock_print, mock_wmi):
+        result = get_product_name()
+        mock_print.assert_called_with("Mocked exceptionError getting Product Name!")
+        self.assertEqual(result, "Unknown")
+
+    def test_get_product(self):
+        self.assertEqual(get_product_name(), "Latitude 7420")
