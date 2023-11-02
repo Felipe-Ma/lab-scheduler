@@ -18,6 +18,34 @@ class Server:
     def __str__(self):
         return f"Server: {self.name}, IP: {self.ip}, Username: {self.username}, OS: {self.operating_system}, CPU: {self.cpu}"
 
+    # Add IP address to the server object
+    def add_ip(self, ip):
+        self.ip = ip
+
+    # Add Username to the server object
+    def add_username(self, username):
+        self.username = username
+
+    # Add Operating System to the server object
+    def add_operating_system(self, operating_system):
+        self.operating_system = operating_system
+
+    # Add CPU to the server object
+    def add_cpu(self, cpu):
+        self.cpu = cpu
+
+    # Add Product Name to the server object
+    def add_product_name(self, product_name):
+        self.product_name = product_name
+
+    # Add Product Version to the server object
+    def add_product_version(self, product_version):
+        self.product_version = product_version
+
+    # When Server object is called, print the following
+    def __call__(self):
+        print(f"Server: {self.name}, IP: {self.ip}, Username: {self.username}, OS: {self.operating_system}, CPU: {self.cpu}")
+
 
 # Retrieve Username of the user
 def get_username():
