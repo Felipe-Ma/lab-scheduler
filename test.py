@@ -18,7 +18,7 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual(result, "Unknown")
 
     def test_get_username(self):
-        self.assertEqual(get_username(), "fmartine")
+        self.assertEqual(get_username(), "Felipe")
 
     # Test get_ip()
     # Test exception
@@ -30,11 +30,11 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual(result, "Unknown")
 
     def test_get_ip(self):
-        self.assertEqual(get_ip(), "10.248.200.191")
+        self.assertEqual(get_ip(), "10.0.0.10")
 
     # Test get_os()
     # Test exception
-    @patch("functions.platform.system", side_effect=Exception("Mocked exception"))
+    @patch("functions.platform.platform", side_effect=Exception("Mocked exception"))
     @patch("functions.print")
     def test_get_os_exception(self, mock_print, mock_platform):
         result = get_os()
@@ -42,7 +42,7 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual(result, "Unknown")
 
     def test_get_os(self):
-        self.assertEqual(get_os(), "Windows")
+        self.assertEqual(get_os(), "Windows-10")
 
     # Test get_cpu()
     # Test exception
@@ -54,7 +54,7 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual(result, "Unknown")
 
     def test_get_cpu(self):
-        self.assertEqual(get_cpu(), "11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz")
+        self.assertEqual(get_cpu(), "AMD Ryzen 5 5600X 6-Core Processor")
 
     # Test get_product_name()
     # Test exception
@@ -66,4 +66,4 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual(result, "Unknown")
 
     def test_get_product(self):
-        self.assertEqual(get_product_name(), "Latitude 7420")
+        self.assertEqual(get_product_name(), "System Product Name")

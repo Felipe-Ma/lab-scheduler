@@ -141,5 +141,4 @@ def get_product_version():
 
 
 
-    return product_name
 
