@@ -67,3 +67,15 @@ class TestFunctions(unittest.TestCase):
 
     def test_get_product(self):
         self.assertEqual(get_product_name(), "System Product Name")
+
+    # Test get_product_version()
+    # Test exception
+    @patch("functions.subprocess.Popen", side_effect=Exception("Mocked exception"))
+    @patch("functions.print")
+    def test_get_product_version_exception(self, mock_print, mock_wmi):
+        result = get_product_version()
+        mock_print.assert_called_with("Mocked exceptionError getting Product Version!")
+        self.assertEqual(result, "Unknown")
+
+    def test_get_product_version(self):
+        self.assertEqual(get_product_version(), "System Version")
