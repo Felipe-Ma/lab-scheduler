@@ -257,3 +257,15 @@ def get_workbook(config_path):
     return workbook
 
 
+# Get Worksheet Name
+def get_worksheet(config_path):
+    worksheet = "Unknown"
+    try:
+        with open(config_path, 'r') as config_file:
+            config = yaml.safe_load(config_file)
+            worksheet = config['workSheet']
+    except Exception as e:
+        print(str(e) + "Error getting worksheet name!")
+    return worksheet
+
+

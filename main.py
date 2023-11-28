@@ -18,6 +18,7 @@ def retrieve_config_values(config):
     config.set_config_path(get_config_path(config.current_directory))
     config.set_credential_path(get_credential_path(config.config_path))
     config.set_workbook(get_workbook(config.config_path))
+    config.set_worksheet(get_worksheet(config.config_path))
 
     config.set_server_name(get_server_name(config.config_path))
     config()
