@@ -41,20 +41,28 @@ def insert_pygsheets(config, server):
     logging.info("Connected to Google Sheets")
 
     # Practice batch update
-    logging.info("Attempting to batch update")
+    logging.info("Opening workbook and worksheet")
     sh = gc.open(config.workbook)
     wks = sh.worksheet_by_title(config.worksheet)
 
     # Update server name
+    logging.info("Updating server name")
     wks.update_value('B1', server.name)
+
+    # Batch update
+    logging.info("Batch updating server info")
     data = [
-        #["Data1", "Data2", "Data3"], # First row
-        #["Data4", "Data5", "Data6"], # Second row
-        #[server.name],
-
+        [config.region],
+        [server.ip],
+        [server.product_name + server.product_version],
+        [server.cpu],
+        [server.operating_system],
+        [config.connection_type],
+        [config.drive_bays],
+        [server.username],
     ]
+    wks.update_values(crange='B3', values=data)
 
-    #.update_values(crange='A1', values=data)
 
 if __name__ == '__main__':
     server = Server()

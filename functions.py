@@ -52,16 +52,11 @@ class Config:
     def set_connection_type(self, connection_type):
         self.connection_type = connection_type
 
-
-
-
-
     def __call__(self):
         # Print all the attributes
         print(f"Current Directory: {self.current_directory}, Configuration Path: {self.config_path}, Server Name Space: {self.server_name}, Server Name No space: {self.serverName_noSpace}, "
               f"Text File Path: {self.textFilePath}, API Credential Path: {self.credential_path}, Workbook: {self.workbook}, Worksheet: {self.worksheet}, Region: {self.region}, Drive Bays:"
               f"{self.drive_bays}, Connection Type: {self.connection_type}")
-
 
 
 class Server:
@@ -203,6 +198,7 @@ def get_product_version():
         print(str(e) + "Error getting Product Version!")
 
     return product_version
+
 
 # Get Folder Where Script is Located
 def get_current_directory():
