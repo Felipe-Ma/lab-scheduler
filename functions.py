@@ -8,19 +8,19 @@ import yaml
 
 class Config:
     def __init__(self, current_directory=None, config_path=None, server_name=None, serverName_noSpace=None,
-                 textFilePath=None, credential_path=None, workBook=None, workSheet=None, region=None,
-                 driveBays=None, connectionType=None):
+                 textFilePath=None, credential_path=None, workbook=None, worksheet=None, region=None,
+                 drive_bays=None, connection_type=None):
         self.current_directory = current_directory
         self.config_path = config_path
         self.server_name = server_name
         self.serverName_noSpace = serverName_noSpace
         self.textFilePath = textFilePath
         self.credential_path = credential_path
-        self.workBook = workBook
-        self.workSheet = workSheet
+        self.workbook = workbook
+        self.worksheet = worksheet
         self.region = region
-        self.driveBays = driveBays
-        self.connectionType = connectionType
+        self.drive_bays = drive_bays
+        self.connection_type = connection_type
 
     def __str__(self):
         return (f"Current Directory: {self.current_directory}")
@@ -37,11 +37,30 @@ class Config:
     def set_server_name(self, server_name):
         self.server_name = server_name
 
+    def set_workbook(self, workbook):
+        self.workbook = workbook
+
+    def set_worksheet(self, worksheet):
+        self.worksheet = worksheet
+
+    def set_region(self, region):
+        self.region = region
+
+    def set_drive_bays(self, drive_bays):
+        self.drive_bays = drive_bays
+
+    def set_connection_type(self, connection_type):
+        self.connection_type = connection_type
+
+
+
 
 
     def __call__(self):
         # Print all the attributes
-        print(f"Current Directory: {self.current_directory}, Configuration Path: {self.config_path}, Server Name Space: {self.server_name}, Server Name No space: {self.serverName_noSpace}, Text File Path: {self.textFilePath}, API Credential Path: {self.credential_path}, Workbook: {self.workBook}, Worksheet: {self.workSheet}, Region: {self.region}, Drive Bays: {self.driveBays}, Connection Type: {self.connectionType}")
+        print(f"Current Directory: {self.current_directory}, Configuration Path: {self.config_path}, Server Name Space: {self.server_name}, Server Name No space: {self.serverName_noSpace}, "
+              f"Text File Path: {self.textFilePath}, API Credential Path: {self.credential_path}, Workbook: {self.workbook}, Worksheet: {self.worksheet}, Region: {self.region}, Drive Bays:"
+              f"{self.drive_bays}, Connection Type: {self.connection_type}")
 
 
 
@@ -225,5 +244,16 @@ def get_server_name(config_path):
         print(str(e) + "Error getting server name!")
     return server_name
 
+
+# Get Workbook Name
+def get_workbook(config_path):
+    workbook = "Unknown"
+    try:
+        with open(config_path, 'r') as config_file:
+            config = yaml.safe_load(config_file)
+            workbook = config['workBook']
+    except Exception as e:
+        print(str(e) + "Error getting workbook name!")
+    return workbook
 
 
