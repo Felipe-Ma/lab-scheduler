@@ -3,9 +3,11 @@ import os
 
 
 def storeConfig():
-    # Get current directory
-    # current_directory = os.getcwd()
-    current_directory = '/home/intel/Desktop/testingEnvironment/server-scheduler/'
+    # Get the folder where this script is located
+    folder_path = os.path.dirname(os.path.realpath(__file__))
+
+    current_directory = folder_path
+    #current_directory = '/home/intel/Desktop/testingEnvironment/server-scheduler/'
     # Using os.path.join to create paths in a platform-independent manner
     config_path = os.path.join(current_directory, 'config.yaml')
 
@@ -52,3 +54,4 @@ def printConfig(current_directory, config_path, serverName_Space, serverName_noS
     print("Worksheet: " + workSheet)
     print("Region: " + region)
 
+storeConfig()
