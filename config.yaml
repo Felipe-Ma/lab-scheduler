@@ -13,7 +13,7 @@ credentialsName: 'credentials.json'
 
 # Workbook and Worksheet names
 workBook: Server Dashboard
-workSheet: Yoda
+workSheet: EXAMPLE
 
 # Region (add appropriate region value here)
 region: Sacramento/Rancho Cordova

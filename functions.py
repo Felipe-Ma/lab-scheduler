@@ -5,6 +5,34 @@ import subprocess
 import cpuinfo
 
 
+class Config:
+    def __init__(self, current_directory=None, config_path=None, serverName_Space=None, serverName_noSpace=None,
+                 textFilePath=None, apiCredentialPath=None, workBook=None, workSheet=None, region=None,
+                 driveBays=None, connectionType=None):
+        self.current_directory = current_directory
+        self.config_path = config_path
+        self.serverName_Space = serverName_Space
+        self.serverName_noSpace = serverName_noSpace
+        self.textFilePath = textFilePath
+        self.apiCredentialPath = apiCredentialPath
+        self.workBook = workBook
+        self.workSheet = workSheet
+        self.region = region
+        self.driveBays = driveBays
+        self.connectionType = connectionType
+
+    def __str__(self):
+        return (f"Current Directory: {self.current_directory}")
+
+    def set_current_directory(self, current_directory):
+        self.current_directory = current_directory
+
+    def __call__(self):
+        # Print all the attributes
+        print(f"Current Directory: {self.current_directory}, Configuration Path: {self.config_path}, Server Name Space: {self.serverName_Space}, Server Name No space: {self.serverName_noSpace}, Text File Path: {self.textFilePath}, API Credential Path: {self.apiCredentialPath}, Workbook: {self.workBook}, Worksheet: {self.workSheet}, Region: {self.region}, Drive Bays: {self.driveBays}, Connection Type: {self.connectionType}")
+
+
+
 class Server:
     def __init__(self, name=None, ip=None, username=None, operating_system=None, cpu=None, product_name=None,
                  product_version=None):
@@ -19,6 +47,10 @@ class Server:
     def __str__(self):
         return (f"Server: {self.name}, IP: {self.ip}, Username: {self.username}, OS: {self.operating_system}, "
                 f"CPU: {self.cpu}")
+
+    def __call__(self):
+        # Print all the attributes
+        print(f"Server: {self.name}, IP: {self.ip}, Username: {self.username}, OS: {self.operating_system}, CPU: {self.cpu}, Product Name: {self.product_name}, Product Version: {self.product_version}")
 
     # Add IP address to the server object
     def add_ip(self, ip):
@@ -137,7 +169,14 @@ def get_product_version():
 
     return product_version
 
-
+# Get Folder Where Script is Located
+def get_current_directory():
+    current_directory = "Unknown"
+    try:
+        current_directory = os.path.dirname(os.path.realpath(__file__))
+    except Exception as e:
+        print(str(e) + "Error getting current directory!")
+    return current_directory
 
 
 

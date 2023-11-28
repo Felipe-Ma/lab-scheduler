@@ -55,3 +55,7 @@ def printConfig(current_directory, config_path, serverName_Space, serverName_noS
     print("Region: " + region)
 
 storeConfig()
+
+if __name__ == '__main__':
+    storeConfig()
+    printConfig()
