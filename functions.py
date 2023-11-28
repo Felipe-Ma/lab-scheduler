@@ -83,6 +83,10 @@ class Server:
         # Print all the attributes
         print(f"Server: {self.name}, IP: {self.ip}, Username: {self.username}, OS: {self.operating_system}, CPU: {self.cpu}, Product Name: {self.product_name}, Product Version: {self.product_version}")
 
+    # Add Name to the server object
+    def set_name(self, name):
+        self.name = name
+
     # Add IP address to the server object
     def add_ip(self, ip):
         self.ip = ip
@@ -291,3 +295,15 @@ def get_drive_bays(config_path):
     except Exception as e:
         print(str(e) + "Error getting drive bays!")
     return drive_bays
+
+
+# Get Connection Type
+def get_connection_type(config_path):
+    connection_type = "Unknown"
+    try:
+        with open(config_path, 'r') as config_file:
+            config = yaml.safe_load(config_file)
+            connection_type = config['connectionType']
+    except Exception as e:
+        print(str(e) + "Error getting connection type!")
+    return connection_type
