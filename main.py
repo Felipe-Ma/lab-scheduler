@@ -1,5 +1,6 @@
 from functions import *
 import logging
+import pygsheets
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -34,14 +35,19 @@ def retrieve_config_values(config):
     config()
 
 
+def insert_pygsheets(config, server):
+    logging.info("Connecting using Credential")
+    #gc = pygsheets.authorize(service_file=config.credential_path)
+
 if __name__ == '__main__':
     server = Server()
     config = Config()
     logging.info("Created server and config objects")
-
 
     retrieve_config_values(config)
     retrieve_server_info(server)
 
     server.set_name(config.server_name)
     server()
+
+    insert_pygsheets(config, server)
