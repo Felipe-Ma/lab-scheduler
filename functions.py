@@ -269,3 +269,13 @@ def get_worksheet(config_path):
     return worksheet
 
 
+# Get Region
+def get_region(config_path):
+    region = "Unknown"
+    try:
+        with open(config_path, 'r') as config_file:
+            config = yaml.safe_load(config_file)
+            region = config['region']
+    except Exception as e:
+        print(str(e) + "Error getting region!")
+    return region
