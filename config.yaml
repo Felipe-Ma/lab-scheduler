@@ -1,7 +1,7 @@
 # Configurations for the Server Scheduler
 
 # Name of the server
-serverName: Testing 1
+serverName: Felipe
 # File path where text file will be created,
 # placed in the server-scheduler folder
 # Linux Example: /root/Desktop/testEnvironment/lab-scheduler/
@@ -9,7 +9,7 @@ serverName: Testing 1
 folderPath: ""
 
 # Name of the Credential File
-credentialsName: 'credentials.json'
+credentialsName: 'credentialss.json'
 
 # Workbook and Worksheet names
 workBook: Server Dashboard

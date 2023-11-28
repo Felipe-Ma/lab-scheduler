@@ -3,18 +3,19 @@ import socket
 import platform
 import subprocess
 import cpuinfo
+import yaml
 
 
 class Config:
-    def __init__(self, current_directory=None, config_path=None, serverName_Space=None, serverName_noSpace=None,
-                 textFilePath=None, apiCredentialPath=None, workBook=None, workSheet=None, region=None,
+    def __init__(self, current_directory=None, config_path=None, server_name=None, serverName_noSpace=None,
+                 textFilePath=None, credential_path=None, workBook=None, workSheet=None, region=None,
                  driveBays=None, connectionType=None):
         self.current_directory = current_directory
         self.config_path = config_path
-        self.serverName_Space = serverName_Space
+        self.server_name = server_name
         self.serverName_noSpace = serverName_noSpace
         self.textFilePath = textFilePath
-        self.apiCredentialPath = apiCredentialPath
+        self.credential_path = credential_path
         self.workBook = workBook
         self.workSheet = workSheet
         self.region = region
@@ -27,9 +28,20 @@ class Config:
     def set_current_directory(self, current_directory):
         self.current_directory = current_directory
 
+    def set_config_path(self, config_path):
+        self.config_path = config_path
+
+    def set_credential_path(self, credential_path):
+        self.credential_path = credential_path
+
+    def set_server_name(self, server_name):
+        self.server_name = server_name
+
+
+
     def __call__(self):
         # Print all the attributes
-        print(f"Current Directory: {self.current_directory}, Configuration Path: {self.config_path}, Server Name Space: {self.serverName_Space}, Server Name No space: {self.serverName_noSpace}, Text File Path: {self.textFilePath}, API Credential Path: {self.apiCredentialPath}, Workbook: {self.workBook}, Worksheet: {self.workSheet}, Region: {self.region}, Drive Bays: {self.driveBays}, Connection Type: {self.connectionType}")
+        print(f"Current Directory: {self.current_directory}, Configuration Path: {self.config_path}, Server Name Space: {self.server_name}, Server Name No space: {self.serverName_noSpace}, Text File Path: {self.textFilePath}, API Credential Path: {self.credential_path}, Workbook: {self.workBook}, Worksheet: {self.workSheet}, Region: {self.region}, Drive Bays: {self.driveBays}, Connection Type: {self.connectionType}")
 
 
 
@@ -178,6 +190,40 @@ def get_current_directory():
         print(str(e) + "Error getting current directory!")
     return current_directory
 
+
+# Get Path of Config File
+def get_config_path(main_directory):
+    config_path = "Unknown"
+    try:
+        config_path = os.path.join(main_directory, 'config.yaml')
+    except Exception as e:
+        print(str(e) + "Error getting config path!")
+    return config_path
+
+
+# Get Path of Credentials File
+def get_credential_path(config_path):
+    credentials_path = "Unknown"
+    try:
+        with open(config_path, 'r') as config_file:
+            config = yaml.safe_load(config_file)
+            credential_name = config['credentialsName']
+            credentials_path = os.path.join(config_path, credential_name)
+    except Exception as e:
+        print(str(e) + "Error getting credentials path!")
+    return credentials_path
+
+
+# Get Server Name
+def get_server_name(config_path):
+    server_name = "Unknown"
+    try:
+        with open(config_path, 'r') as config_file:
+            config = yaml.safe_load(config_file)
+            server_name = config['serverName']
+    except Exception as e:
+        print(str(e) + "Error getting server name!")
+    return server_name
 
 
 
