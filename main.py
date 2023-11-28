@@ -20,6 +20,7 @@ def retrieve_config_values(config):
     config.set_workbook(get_workbook(config.config_path))
     config.set_worksheet(get_worksheet(config.config_path))
     config.set_region(get_region(config.config_path))
+    config.set_drive_bays(get_drive_bays(config.config_path))
 
     config.set_server_name(get_server_name(config.config_path))
     config()

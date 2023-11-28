@@ -279,3 +279,15 @@ def get_region(config_path):
     except Exception as e:
         print(str(e) + "Error getting region!")
     return region
+
+
+# Get Drive Bays
+def get_drive_bays(config_path):
+    drive_bays = "Unknown"
+    try:
+        with open(config_path, 'r') as config_file:
+            config = yaml.safe_load(config_file)
+            drive_bays = config['driveBays']
+    except Exception as e:
+        print(str(e) + "Error getting drive bays!")
+    return drive_bays
