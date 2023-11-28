@@ -231,7 +231,10 @@ def get_credential_path(config_path):
         with open(config_path, 'r') as config_file:
             config = yaml.safe_load(config_file)
             credential_name = config['credentialsName']
-            credentials_path = os.path.join(config_path, credential_name)
+            # Extract the directory from the config_path
+            config_directory = os.path.dirname(config_path)
+            # Join the directory path with the credential file name
+            credentials_path = os.path.join(config_directory, credential_name)
     except Exception as e:
         print(str(e) + "Error getting credentials path!")
     return credentials_path

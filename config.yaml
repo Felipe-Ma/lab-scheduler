@@ -1,7 +1,7 @@
 # Configurations for the Server Scheduler
 
 # Name of the server
-serverName: Felipe
+serverName: VADER 2.0
 # File path where text file will be created,
 # placed in the server-scheduler folder
 # Linux Example: /root/Desktop/testEnvironment/lab-scheduler/

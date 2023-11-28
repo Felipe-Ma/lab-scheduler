@@ -36,8 +36,25 @@ def retrieve_config_values(config):
 
 
 def insert_pygsheets(config, server):
-    logging.info("Connecting using Credential")
-    #gc = pygsheets.authorize(service_file=config.credential_path)
+    logging.info("Attempting to connect to Google Sheets")
+    gc = pygsheets.authorize(service_file=config.credential_path)
+    logging.info("Connected to Google Sheets")
+
+    # Practice batch update
+    logging.info("Attempting to batch update")
+    sh = gc.open(config.workbook)
+    wks = sh.worksheet_by_title(config.worksheet)
+
+    # Update server name
+    wks.update_value('B1', server.name)
+    data = [
+        #["Data1", "Data2", "Data3"], # First row
+        #["Data4", "Data5", "Data6"], # Second row
+        #[server.name],
+
+    ]
+
+    #.update_values(crange='A1', values=data)
 
 if __name__ == '__main__':
     server = Server()
