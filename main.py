@@ -43,14 +43,14 @@ def insert_pygsheets(config, server):
     logging.info("Opening workbook and worksheet")
     sh = gc.open(config.workbook)
     wks = sh.worksheet_by_title(config.worksheet)
+    logging.info("Opened workbook and worksheet")
 
-    # Update server name
-    logging.info("Updating server name")
-    wks.update_value('B1', server.name)
 
     # Batch update
-    logging.info("Batch updating server info")
+    logging.info("Batch updating server column info")
     column_b = [
+        [server.name],
+        [],
         [config.region],
         [server.ip],
         [server.product_name + server.product_version],
@@ -61,17 +61,16 @@ def insert_pygsheets(config, server):
         [server.username],
         [get_time()]
     ]
-    wks.update_values(crange='B3', values=column_b)
+    wks.update_values(crange='B1', values=column_b)
+    logging.info("Server info updated")
 
-    logging.info("Batch update complete")
-
-    logging.info("Batch updating server info")
+    logging.info("Batch updating server row info")
     row_1 = [
         [config.region, server.product_name, server.cpu, server.operating_system,
              config.connection_type, config.drive_bays]
     ]
     wks.update_values(crange='D1', values=row_1)
-    #wks.clear(start='B12', end = None)
+    logging.info("Server info updated")
 
 
 
