@@ -5,9 +5,8 @@ import pygsheets
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
-
 def retrieve_server_info(server):
-    server()
+    #server()
     logging.info("Retrieving server info")
     server.add_ip(get_ip())
     server.add_username(get_username())
@@ -16,11 +15,11 @@ def retrieve_server_info(server):
     server.add_product_name(get_product_name())
     server.add_product_version(get_product_version())
     logging.info("Server info retrieved")
-    server()
+    #server()
 
 
 def retrieve_config_values(config):
-    config()
+    #config()
     logging.info("Retrieving config values")
     config.set_current_directory(get_current_directory())
     config.set_config_path(get_config_path(config.current_directory))
@@ -32,7 +31,7 @@ def retrieve_config_values(config):
     config.set_connection_type(get_connection_type(config.config_path))
     config.set_server_name(get_server_name(config.config_path))
     logging.info("Config values retrieved")
-    config()
+    #config()
 
 
 def insert_pygsheets(config, server):
@@ -87,6 +86,6 @@ if __name__ == '__main__':
     retrieve_server_info(server)
 
     server.set_name(config.server_name)
-    server()
+    #server()
 
     insert_pygsheets(config, server)

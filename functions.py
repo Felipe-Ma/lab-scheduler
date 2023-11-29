@@ -189,7 +189,7 @@ def get_product_version():
     try:
         if os.name == 'nt':
             product_version = subprocess.check_output('wmic csproduct get version').decode().split('\n')[1].strip()
-            print("Here")
+            #print("Here")
             return product_version
         elif os.name == 'posix':
             product_version = subprocess.check_output('cat /sys/class/dmi/id/product_version', shell=True).decode().strip()
