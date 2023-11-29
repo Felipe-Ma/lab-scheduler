@@ -51,7 +51,7 @@ def insert_pygsheets(config, server):
 
     # Batch update
     logging.info("Batch updating server info")
-    data = [
+    column_b = [
         [config.region],
         [server.ip],
         [server.product_name + server.product_version],
@@ -60,11 +60,17 @@ def insert_pygsheets(config, server):
         [config.connection_type],
         [config.drive_bays],
         [server.username],
+        [get_time()]
     ]
-    wks.update_values(crange='B3', values=data)
+    wks.update_values(crange='B3', values=column_b)
+
+    #wks.clear(start='B12', end = None)
+
 
 
 if __name__ == '__main__':
+    print(get_drive_info())
+    exit(0)
     server = Server()
     config = Config()
     logging.info("Created server and config objects")

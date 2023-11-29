@@ -4,6 +4,7 @@ import platform
 import subprocess
 import cpuinfo
 import yaml
+from datetime import datetime
 
 
 class Config:
@@ -306,3 +307,33 @@ def get_connection_type(config_path):
     except Exception as e:
         print(str(e) + "Error getting connection type!")
     return connection_type
+
+
+# Get Time
+def get_time():
+    current_datetime = datetime.now()
+    return current_datetime.strftime("%Y-%m-%d %H:%M:%S")
+
+# Get Drive information
+def get_drive_info():
+    drives = []
+
+    try:
+        if os.name == 'nt':
+            result = subprocess.run(['wmic', 'diskdrive', 'get', 'model,name,size'], stdout=subprocess.PIPE)
+            result = result.stdout.decode().split('\n')
+            for drive in result[1:]:
+                if drive:
+                    try:
+                        size = drive.strip().split()[-1]
+                        size = str(int(size) // (10**9))
+                        drive_string = drive.strip().split()[:-1]
+                        drive_string = " ".join(drive_string)
+                        drive_string += "\t" + size + " GB"
+                        drives.append(drive_string)
+                    except:
+                        pass
+            return drives
+
+    except Exception as e:
+        print(str(e) + "Error getting drive info!")
