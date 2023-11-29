@@ -1,6 +1,7 @@
 from functions import *
 import logging
 import pygsheets
+import time
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -47,9 +48,10 @@ def insert_pygsheets(config, server):
 
 
     # Batch update
-    logging.info("Batch updating server column info")
+    logging.info("Creating batch update list")
     column_b = [
-        [server.name],
+        [server.name, config.region, server.product_name, server.cpu, server.operating_system, config.connection_type,
+         config.drive_bays],
         [],
         [config.region],
         [server.ip],
@@ -61,22 +63,24 @@ def insert_pygsheets(config, server):
         [server.username],
         [get_time()]
     ]
-    wks.update_values(crange='B1', values=column_b)
-    logging.info("Server info updated")
+    logging.info("Batch update list created")
 
-    logging.info("Batch updating server row info")
-    row_1 = [
-        [config.region, server.product_name, server.cpu, server.operating_system,
-             config.connection_type, config.drive_bays]
-    ]
-    wks.update_values(crange='D1', values=row_1)
-    logging.info("Server info updated")
+    logging.info("Batch updating server information")
+    wks.update_values(crange='B1', values=column_b)
+    logging.info("Server information updated")
+
+    #logging.info("Batch updating server row info")
+    #row_1 = [
+    #    [config.region, server.product_name, server.cpu, server.operating_system,
+    #         config.connection_type, config.drive_bays]
+    #]
+    #wks.update_values(crange='D1', values=row_1)
+    #logging.info("Server info updated")
 
 
 
 if __name__ == '__main__':
-    #print(get_drive_info())
-    #exit(0)
+    start_time = time.time()
     server = Server()
     config = Config()
     logging.info("Created server and config objects")
@@ -88,3 +92,5 @@ if __name__ == '__main__':
     #server()
 
     insert_pygsheets(config, server)
+
+    logging.info("Program finished in %s seconds" % (time.time() - start_time))
