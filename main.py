@@ -64,13 +64,21 @@ def insert_pygsheets(config, server):
     ]
     wks.update_values(crange='B3', values=column_b)
 
+    logging.info("Batch update complete")
+
+    logging.info("Batch updating server info")
+    row_1 = [
+        [config.region, server.product_name, server.cpu, server.operating_system,
+             config.connection_type, config.drive_bays]
+    ]
+    wks.update_values(crange='D1', values=row_1)
     #wks.clear(start='B12', end = None)
 
 
 
 if __name__ == '__main__':
-    print(get_drive_info())
-    exit(0)
+    #print(get_drive_info())
+    #exit(0)
     server = Server()
     config = Config()
     logging.info("Created server and config objects")
