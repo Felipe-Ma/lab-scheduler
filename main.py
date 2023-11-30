@@ -76,6 +76,31 @@ def insert_pygsheets(config, server):
     wks.update_values(crange='B1', values=column_b)
     logging.info("Server information updated")
 
+    return wks
+
+
+def update_time_drive_pygsheets(config, server, wks):
+    logging.info("Updating server drive information")
+    server.set_drives(get_drives())
+
+    logging.info("Creating batch update list")
+    column_b = [
+        [get_time()]
+    ]
+
+    # Clears any prior drive data
+    for i in range(0, 24):
+        if i < len(server.drives):
+            column_b.append([server.drives[i]])
+        else:
+            column_b.append([""])
+
+    logging.info("Batch update list created")
+
+    logging.info("Batch updating server information")
+    wks.update_values(crange='B11', values=column_b)
+    logging.info("Server information updated")
+
 
 if __name__ == '__main__':
     start_time = time.time()
@@ -89,6 +114,17 @@ if __name__ == '__main__':
     server.set_name(config.server_name)
     #server()
 
-    insert_pygsheets(config, server)
+    wks = insert_pygsheets(config, server)
 
-    logging.info("Program finished in %s seconds" % (time.time() - start_time))
+    logging.info("Initial Sheets Update completed in %s seconds" % (time.time() - start_time))
+
+    logging.info("Going to sleep for 1 minute")
+    # Go to sleep for 1 Minute
+    time.sleep(60)
+
+    # Update the Last Updated Time and Drive Information in Pygsheets every minute
+    while True:
+        start_time = time.time()
+        update_time_drive_pygsheets(config, server, wks)
+        logging.info("Ping and Drive Update completed in %s seconds" % (time.time() - start_time))
+        time.sleep(60)
