@@ -41,7 +41,7 @@ def insert_pygsheets(config, server):
     gc = pygsheets.authorize(service_file=config.credential_path)
     logging.info("Connected to Google Sheets")
 
-    # Practice batch update
+    # Open workbook and worksheet
     logging.info("Opening workbook and worksheet")
     sh = gc.open(config.workbook)
     wks = sh.worksheet_by_title(config.worksheet)
@@ -70,14 +70,11 @@ def insert_pygsheets(config, server):
         else:
             column_b.append([""])
 
-
-
     logging.info("Batch update list created")
 
     logging.info("Batch updating server information")
     wks.update_values(crange='B1', values=column_b)
     logging.info("Server information updated")
-
 
 
 if __name__ == '__main__':
