@@ -17,7 +17,7 @@ def retrieve_server_info(server):
     server.add_product_version(get_product_version())
     server.set_drives(get_drives())
     logging.info("Server info retrieved")
-    server()
+    #server()
 
 
 def retrieve_config_values(config):
@@ -47,7 +47,6 @@ def insert_pygsheets(config, server):
     wks = sh.worksheet_by_title(config.worksheet)
     logging.info("Opened workbook and worksheet")
 
-
     # Batch update
     logging.info("Creating batch update list")
     column_b = [
@@ -64,6 +63,15 @@ def insert_pygsheets(config, server):
         [server.username],
         [get_time()]
     ]
+    # Clears any prior drive data
+    for i in range(0, 24):
+        if i < len(server.drives):
+            column_b.append([server.drives[i]])
+        else:
+            column_b.append([""])
+
+
+
     logging.info("Batch update list created")
 
     logging.info("Batch updating server information")
@@ -92,6 +100,6 @@ if __name__ == '__main__':
     server.set_name(config.server_name)
     #server()
 
-    #insert_pygsheets(config, server)
+    insert_pygsheets(config, server)
 
     logging.info("Program finished in %s seconds" % (time.time() - start_time))

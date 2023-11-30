@@ -350,3 +350,4 @@ def get_drives():
 
     except Exception as e:
         print(str(e) + "Error getting drive info!")
+
