@@ -15,8 +15,9 @@ def retrieve_server_info(server):
     server.add_cpu(get_cpu())
     server.add_product_name(get_product_name())
     server.add_product_version(get_product_version())
+    server.set_drives(get_drives())
     logging.info("Server info retrieved")
-    #server()
+    server()
 
 
 def retrieve_config_values(config):
@@ -91,6 +92,6 @@ if __name__ == '__main__':
     server.set_name(config.server_name)
     #server()
 
-    insert_pygsheets(config, server)
+    #insert_pygsheets(config, server)
 
     logging.info("Program finished in %s seconds" % (time.time() - start_time))

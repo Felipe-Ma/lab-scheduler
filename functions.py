@@ -62,7 +62,7 @@ class Config:
 
 class Server:
     def __init__(self, name=None, ip=None, username=None, operating_system=None, cpu=None, product_name=None,
-                 product_version=None):
+                 product_version=None, drives=None):
         self.name = name
         self.ip = ip
         self.username = username
@@ -70,6 +70,7 @@ class Server:
         self.cpu = cpu
         self.product_name = product_name
         self.product_version = product_version
+        self.drives = drives
 
     def __str__(self):
         return (f"Server: {self.name}, IP: {self.ip}, Username: {self.username}, OS: {self.operating_system}, "
@@ -77,7 +78,9 @@ class Server:
 
     def __call__(self):
         # Print all the attributes
-        print(f"Server: {self.name}, IP: {self.ip}, Username: {self.username}, OS: {self.operating_system}, CPU: {self.cpu}, Product Name: {self.product_name}, Product Version: {self.product_version}")
+        print(f"Server: {self.name}, IP: {self.ip}, Username: {self.username}, "
+              f"OS: {self.operating_system}, CPU: {self.cpu}, Product Name: {self.product_name}, "
+              f"Product Version: {self.product_version}, Drives: {self.drives}")
 
     # Add Name to the server object
     def set_name(self, name):
@@ -106,6 +109,9 @@ class Server:
     # Add Product Version to the server object
     def add_product_version(self, product_version):
         self.product_version = product_version
+
+    def set_drives(self, drives):
+        self.drives = drives
 
 
 # Retrieve Username of the user
@@ -310,8 +316,9 @@ def get_time():
     current_datetime = datetime.now()
     return current_datetime.strftime("%Y-%m-%d %H:%M:%S")
 
+
 # Get Drive information
-def get_drive_info():
+def get_drives():
     drives = []
 
     try:
