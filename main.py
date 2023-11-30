@@ -78,14 +78,6 @@ def insert_pygsheets(config, server):
     wks.update_values(crange='B1', values=column_b)
     logging.info("Server information updated")
 
-    #logging.info("Batch updating server row info")
-    #row_1 = [
-    #    [config.region, server.product_name, server.cpu, server.operating_system,
-    #         config.connection_type, config.drive_bays]
-    #]
-    #wks.update_values(crange='D1', values=row_1)
-    #logging.info("Server info updated")
-
 
 
 if __name__ == '__main__':
