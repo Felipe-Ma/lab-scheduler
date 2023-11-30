@@ -107,10 +107,6 @@ class Server:
     def add_product_version(self, product_version):
         self.product_version = product_version
 
-    # When Server object is called, print all the attributes
-    def __call__(self):
-        print(f"Server: {self.name}, IP: {self.ip}, Username: {self.username}, OS: {self.operating_system}, CPU: {self.cpu}, Product Name: {self.product_name}, Product Version: {self.product_version}")
-
 
 # Retrieve Username of the user
 def get_username():
@@ -319,7 +315,17 @@ def get_drive_info():
     drives = []
 
     try:
-        if os.name == 'nt':
+        if os.name == 'posix':
+            result = subprocess.Popen(['lsblk', '-d', '-n', '-o', 'MODEL,NAME,SIZE,TYPE'], stdout=subprocess.PIPE)
+            result = result.communicate()[0].decode().split('\n')
+            for drive in result:
+                if drive:
+                    try:
+                        drives.append(drive)
+                    except Exception as e:
+                        print(str(e))
+
+        elif os.name == 'nt':
             result = subprocess.run(['wmic', 'diskdrive', 'get', 'model,name,size'], stdout=subprocess.PIPE)
             result = result.stdout.decode().split('\n')
             for drive in result[1:]:
@@ -331,8 +337,8 @@ def get_drive_info():
                         drive_string = " ".join(drive_string)
                         drive_string += "\t" + size + " GB"
                         drives.append(drive_string)
-                    except:
-                        pass
+                    except Exception as e:
+                        print(str(e))
             return drives
 
     except Exception as e:
