@@ -50,7 +50,7 @@ def insert_pygsheets(config, server):
     # Batch update
     logging.info("Creating batch update list")
     column_b = [
-        [server.name, config.region, server.product_name, server.cpu, server.operating_system, config.connection_type,
+        [server.name, '=HYPERLINK("https://npsg-wiki.elements.local/display/~pashmore/Jedi+6", "Jedi 6")',config.region, server.product_name, server.cpu, server.operating_system, config.connection_type,
          config.drive_bays],
         [],
         [config.region],
