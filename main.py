@@ -57,7 +57,7 @@ def insert_pygsheets(config, server):
         [],
         [config.region],
         [server.ip],
-        [server.product_name + server.product_version],
+        [server.product_name + " " + server.product_version],
         [server.cpu],
         [server.operating_system],
         [config.connection_type],
