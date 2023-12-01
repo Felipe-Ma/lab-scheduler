@@ -346,7 +346,7 @@ def get_drives():
                         drives.append(drive_string)
                     except Exception as e:
                         print(str(e))
-            return drives
+        return drives
 
     except Exception as e:
         print(str(e) + "Error getting drive info!")
