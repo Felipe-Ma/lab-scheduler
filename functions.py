@@ -151,20 +151,16 @@ def get_os():
             operating_system = platform.platform(terse=True)
             return operating_system
         elif os.name == 'posix':
-            try:
-                command = ['/sbin/dmidecode', '-s', 'system-product-name']
-                result = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                stdout, stderr = result.communicate()
-
-                if result.returncode == 0:
-                    return (str(stdout.decode('utf-8').strip()))
-                else:
-                    print("An error occurred: ", stderr.decode('utf-8').strip())
-                    return "Unknown"
-            except Exception:
-                return "Unknown"
-
-            # Needs to be fixed
+            RELEASE_DATA = {}
+            with open("/etc/os-release") as f:
+                reader = csv.reader(f, delimiter="=")
+                for row in reader:
+                    if row:
+                        RELEASE_DATA[row[0]] = row[1]
+            operating_system = RELEASE_DATA["PRETTY_NAME"]
+            OS = "{} {}".format(RELEASE_DATA["NAME"], RELEASE_DATA["VERSION"])
+            return operating_system
+        # Needs to be fixed
             #operating_system = platform.platform(terse=True)
             #return operating_system
 
