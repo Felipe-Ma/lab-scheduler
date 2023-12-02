@@ -4,6 +4,7 @@ import platform
 import subprocess
 import cpuinfo
 import yaml
+import csv
 from datetime import datetime
 
 
