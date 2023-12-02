@@ -151,9 +151,22 @@ def get_os():
             operating_system = platform.platform(terse=True)
             return operating_system
         elif os.name == 'posix':
+            try:
+                command = ['/sbin/dmidecode', '-s', 'system-product-name']
+                result = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                stdout, stderr = result.communicate()
+
+                if result.returncode == 0:
+                    return (str(stdout.decode('utf-8').strip()))
+                else:
+                    print("An error occurred: ", stderr.decode('utf-8').strip())
+                    return "Unknown"
+            except Exception:
+                return "Unknown"
+
             # Needs to be fixed
-            operating_system = platform.platform(terse=True)
-            return operating_system
+            #operating_system = platform.platform(terse=True)
+            #return operating_system
 
     except Exception as e:
         print(str(e) + "Error getting Operating System!")
