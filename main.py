@@ -126,9 +126,15 @@ if __name__ == '__main__':
     # Go to sleep for 1 Minute
     time.sleep(60)
 
+
+
     # Update the Last Updated Time and Drive Information in Pygsheets every minute
     while True:
-        start_time = time.time()
-        update_time_drive_pygsheets(config, server, wks)
-        logging.info("Ping and Drive Update completed in %s seconds" % (time.time() - start_time))
+        try:
+            start_time = time.time()
+            update_time_drive_pygsheets(config, server, wks)
+            logging.info("Ping and Drive Update completed in %s seconds" % (time.time() - start_time))
+        except Exception as e:
+            logging.error(e)
+            logging.error("Error updating drive information")
         time.sleep(60)
