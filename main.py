@@ -51,8 +51,9 @@ def insert_pygsheets(config, server):
 
     # Batch update
     logging.info("Creating batch update list")
+    logging.info(server.hyperlink)
     column_b = [
-        [server.name, '=HYPERLINK("https://npsg-wiki.elements.local/display/~pashmore/Jedi+6", "Jedi 6")',config.region, server.product_name, server.cpu, server.operating_system, config.connection_type,
+        [server.name, server.hyperlink, config.region, server.product_name, server.cpu, server.operating_system, config.connection_type,
          config.drive_bays],
         [],
         [config.region],
@@ -114,6 +115,7 @@ if __name__ == '__main__':
     retrieve_server_info(server)
 
     server.set_name(config.server_name)
+    server.set_hyperlink(get_hyperlink(config.server_name))
     #server()
 
     wks = insert_pygsheets(config, server)

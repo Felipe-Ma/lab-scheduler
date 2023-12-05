@@ -63,7 +63,7 @@ class Config:
 
 class Server:
     def __init__(self, name=None, ip=None, username=None, operating_system=None, cpu=None, product_name=None,
-                 product_version=None, drives=None):
+                 product_version=None, drives=None, hyperlink=None):
         self.name = name
         self.ip = ip
         self.username = username
@@ -72,6 +72,7 @@ class Server:
         self.product_name = product_name
         self.product_version = product_version
         self.drives = drives
+        self.hyperlink = hyperlink
 
     def __str__(self):
         return (f"Server: {self.name}, IP: {self.ip}, Username: {self.username}, OS: {self.operating_system}, "
@@ -113,6 +114,9 @@ class Server:
 
     def set_drives(self, drives):
         self.drives = drives
+
+    def set_hyperlink(self, hyperlink):
+        self.hyperlink = hyperlink
 
 
 # Retrieve Username of the user
@@ -371,3 +375,15 @@ def get_drives():
     except Exception as e:
         print(str(e) + "Error getting drive info!")
 
+
+# Get Hyperlink
+def get_hyperlink(server_name):
+    hyperlink = "Unknown"
+    # remove spaces from server name
+    server_name_plus = server_name.replace(" ", "+")
+    try:
+        hyperlink = '=HYPERLINK("https://npsg-wiki.elements.local/display/~pashmore/' + server_name_plus + '", "' + server_name + '")'
+        print(hyperlink)
+    except Exception as e:
+        print(str(e) + "Error getting hyperlink!")
+    return hyperlink

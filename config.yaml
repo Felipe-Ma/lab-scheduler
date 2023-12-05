@@ -1,7 +1,7 @@
 # Configurations for the Server Scheduler
 
 # Name of the server
-serverName: VADER 2.0
+serverName: Jedi 5
 # File path where text file will be created,
 # placed in the server-scheduler folder
 # Linux Example: /root/Desktop/testEnvironment/lab-scheduler/
