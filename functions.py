@@ -383,7 +383,6 @@ def get_hyperlink(server_name):
     server_name_plus = server_name.replace(" ", "+")
     try:
         hyperlink = '=HYPERLINK("https://npsg-wiki.elements.local/display/~pashmore/' + server_name_plus + '", "' + server_name + '")'
-        print(hyperlink)
     except Exception as e:
         print(str(e) + "Error getting hyperlink!")
     return hyperlink

@@ -51,7 +51,6 @@ def insert_pygsheets(config, server):
 
     # Batch update
     logging.info("Creating batch update list")
-    logging.info(server.hyperlink)
     column_b = [
         [server.name, server.hyperlink, config.region, server.product_name, server.cpu, server.operating_system, config.connection_type,
          config.drive_bays],
