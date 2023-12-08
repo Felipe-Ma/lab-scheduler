@@ -82,11 +82,20 @@ def insert_pygsheets(config, server):
 
 
 def update_time_drive_pygsheets(config, server, wks):
-    logging.info("Updating server drive information")
+    logging.info("Updating server information")
     server.set_drives(get_drives())
+    server.add_ip(get_ip())
+
 
     logging.info("Creating batch update list")
     column_b = [
+        [server.ip],
+        [], #product name
+        [], #cpu
+        [], #os
+        [], #connection type
+        [], #drive bays
+        [], #username
         [get_time()]
     ]
 
@@ -100,7 +109,7 @@ def update_time_drive_pygsheets(config, server, wks):
     logging.info("Batch update list created")
 
     logging.info("Batch updating server information")
-    wks.update_values(crange='B11', values=column_b)
+    wks.update_values(crange='B4', values=column_b)
     logging.info("Server information updated")
 
 
