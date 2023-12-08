@@ -117,7 +117,16 @@ if __name__ == '__main__':
     server.set_hyperlink(get_hyperlink(config.server_name))
     #server()
 
-    wks = insert_pygsheets(config, server)
+    initial_insertion = False
+    wks = None
+    while not initial_insertion:
+        try:
+            wks = insert_pygsheets(config, server)
+            initial_insertion = True
+        except Exception as e:
+            logging.error(e)
+            logging.error("Error inserting initial server information")
+            time.sleep(15)
 
     logging.info("Initial Sheets Update completed in %s seconds" % (time.time() - start_time))
 
