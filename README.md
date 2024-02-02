@@ -1,4 +1,14 @@
 
+# Project Title
+
+Lab-Scheduler: Server Infrastructure Client to Update Google Sheets to Display Relevant Information
+
+
+## Authors
+
+- [@Felipe-Ma](https://github.com/Felipe-Ma)
+
+
 ## Installation
 
 Install lab-scheduler with git clone 
@@ -14,16 +24,54 @@ Create a python3 virtual environment
 ```
 
 Install Pip modules
+#### Windows
 ```bash
-  windows:
-    lab-scheduler-venv\Scripts\activate
-  linux:
-    source lab-scheduler-venv/bin/activate
-  pip install pip --upgrade
-  pip install pygsheets py-cpuinfo pyyaml
+  lab-scheduler-venv\Scripts\activate
+  pip install --upgrade pip
+  pip install pygsheets pyyaml py-cpuinfo
 ```
-<!-- Note: You can add more details or comments for each step as needed. -->
 
+#### Linux
+```bash
+source lab-scheduler-venv/bin/activate
+pip install --upgrade pip
+pip install pygsheets pyyaml py-cpuinfo
+```
 
 
     
+## Configuration
+
+Configure config.yaml
+
+```bash
+# Example Configuration
+serverName: Solidigm Example
+folderPath: "/home/solidigm/lab-scheduler/"
+credentialsName: credentials.json
+workBook: Example workbook
+workSheet: Example worksheet
+region: Rancho Cordova
+drivebays: 8
+connectiontype: U.2
+```
+
+#### Linux
+Configure lab-scheduler.sh
+```bash
+# Example shell script
+source /home/nsg/lab-scheduler-ven/bin/activate
+/home/nsg/lab-scheduler-venv/bin/python3 /home/nsg/lab-scheduler/main.py
+deactivate
+```
+## Automation
+
+How to Automate Script Upon Startup
+
+#### Linux
+Setup crontab to shell Script
+
+sudo crontab -e
+```bash
+  @reboot sudo /home/nsg/lab-scheduler/lab-scheduler.sh
+```
