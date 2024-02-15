@@ -1,7 +1,7 @@
 # Configurations for the Server Scheduler
 
 # Name of the server
-serverName: Jedi 5
+serverName:  # Desired Server Name
 # File path where text file will be created,
 # placed in the server-scheduler folder
 # Linux Example: /root/Desktop/testEnvironment/lab-scheduler/
@@ -9,19 +9,19 @@ serverName: Jedi 5
 folderPath: ""
 
 # Name of the Credential File
-credentialsName: 'credentialss.json'
+credentialsName: # credentials.json
 
 # Workbook and Worksheet names
-workBook: Server Dashboard
-workSheet: EXAMPLE
+workBook: # Server Dashboard
+workSheet: # EXAMPLE
 
 # Region (add appropriate region value here)
-region: Sacramento/Rancho Cordova
+region: # Sacramento/Rancho Cordova
 
 # Drive Bays (add appropriate drive bays here)
-driveBays: 16
+driveBays: # 16
 
 # Connection Type (add appropriate connection type here)
-connectionType: U.2
+connectionType: # U.2
 
 
