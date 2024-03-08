@@ -26,6 +26,9 @@ def storeConfig():
     # Store Region
     region = config['region']
 
+    # Store location
+    location = config['location']
+
     # store API Credentials
     apiCredential = config['credentialsName']
     apiCredentialPath = os.path.join(current_directory, apiCredential)
@@ -39,7 +42,7 @@ def storeConfig():
     # Store Connection Type
     connectionType = config['connectionType']
 
-    return current_directory, config_path, serverName_Space, serverName_noSpace, textFilePath, apiCredentialPath, workBook, workSheet, region, driveBays, connectionType
+    return current_directory, config_path, serverName_Space, serverName_noSpace, textFilePath, apiCredentialPath, workBook, workSheet, region, location, driveBays, connectionType
 
 
 def printConfig(current_directory, config_path, serverName_Space, serverName_noSpace, textFilePath, apiCredentialPath,
