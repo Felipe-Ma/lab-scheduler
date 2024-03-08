@@ -18,6 +18,9 @@ workSheet: # EXAMPLE
 # Region (add appropriate region value here)
 region: # Sacramento/Rancho Cordova
 
+# Location (add appropriate location value here)
+location: # Sac 119 - Rack 1
+
 # Drive Bays (add appropriate drive bays here)
 driveBays: # 16
 

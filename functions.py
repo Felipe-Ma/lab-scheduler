@@ -10,7 +10,7 @@ from datetime import datetime
 
 class Config:
     def __init__(self, current_directory=None, config_path=None, server_name=None, serverName_noSpace=None,
-                 textFilePath=None, credential_path=None, workbook=None, worksheet=None, region=None,
+                 textFilePath=None, credential_path=None, workbook=None, worksheet=None, region=None, location=None,
                  drive_bays=None, connection_type=None):
         self.current_directory = current_directory
         self.config_path = config_path
@@ -20,6 +20,7 @@ class Config:
         self.credential_path = credential_path
         self.workbook = workbook
         self.worksheet = worksheet
+        self.location = location
         self.region = region
         self.drive_bays = drive_bays
         self.connection_type = connection_type
@@ -47,6 +48,9 @@ class Config:
 
     def set_region(self, region):
         self.region = region
+
+    def set_location(self, location):
+        self.location = location
 
     def set_drive_bays(self, drive_bays):
         self.drive_bays = drive_bays
@@ -310,6 +314,15 @@ def get_region(config_path):
         print(str(e) + "Error getting region!")
     return region
 
+def get_location(config_path):
+    location = "Unknown"
+    try:
+        with open(config_path, 'r') as config_file:
+            config = yaml.safe_load(config_file)
+            location = config['location']
+    except Exception as e:
+        print(str(e) + "Error getting location!")
+    return location
 
 # Get Drive Bays
 def get_drive_bays(config_path):

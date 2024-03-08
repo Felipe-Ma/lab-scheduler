@@ -31,6 +31,7 @@ def retrieve_config_values(config):
     config.set_workbook(get_workbook(config.config_path))
     config.set_worksheet(get_worksheet(config.config_path))
     config.set_region(get_region(config.config_path))
+    config.set_location(get_location(config.config_path))
     config.set_drive_bays(get_drive_bays(config.config_path))
     config.set_connection_type(get_connection_type(config.config_path))
     config.set_server_name(get_server_name(config.config_path))
@@ -51,31 +52,48 @@ def insert_pygsheets(config, server):
 
     # Batch update
     logging.info("Creating batch update list")
-    column_b = [
-        [server.name, server.hyperlink, config.region, server.product_name, server.cpu, server.operating_system, config.connection_type,
+    column_a = [
+        ["Server Name"],
+        ["Region"],
+        ["Location"],
+        ["IP"],
+        ["Model"],
+        ["CPU"],
+        ["OS"],
+        ["Connection Type"],
+        ["Drive Bays"],
+        ["Username"],
+        ["Last Updated"],
+        ["Drives"]
+    ]
+    info_column = [
+        ["Server Name", server.name, config.region, server.product_name, server.cpu, server.operating_system, config.connection_type,
          config.drive_bays],
-        [],
-        [config.region],
-        [server.ip],
-        [server.product_name + " " + server.product_version],
-        [server.cpu],
-        [server.operating_system],
-        [config.connection_type],
-        [config.drive_bays],
-        [server.username],
-        [get_time()]
+        ["Region", config.region],
+        ["Location", config.location],
+        ["IP", server.ip],
+        ["Model", server.product_name + " " + server.product_version],
+        ["CPU", server.cpu],
+        ["OS", server.operating_system],
+        ["Connection", config.connection_type],
+        ["Drive Bays", config.drive_bays],
+        ["User", server.username],
+        ["Last Ping", get_time()]
     ]
     # Clears any prior drive data
     for i in range(0, 24):
         if i < len(server.drives):
-            column_b.append([server.drives[i]])
+            info_column.append(["Drive " + str(i+1), server.drives[i]])
         else:
-            column_b.append([""])
+            info_column.append([""])
 
     logging.info("Batch update list created")
 
     logging.info("Batch updating server information")
-    wks.update_values(crange='B1', values=column_b)
+    # Update all values
+    wks.update_values(crange='A1', values=info_column)
+    #wks.update_values(crange='B1', values=column_b)
+
     logging.info("Server information updated")
 
     return wks
