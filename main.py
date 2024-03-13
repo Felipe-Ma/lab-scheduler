@@ -68,7 +68,7 @@ def insert_pygsheets(config, server):
     ]
     info_column = [
         ["Server Name", server.name, config.region, server.product_name, server.cpu, server.operating_system, config.connection_type,
-         config.drive_bays + "Bays"],
+         str(config.drive_bays) + "Bays"],
         ["Region", config.region],
         ["Location", config.location],
         ["IP", server.ip],
